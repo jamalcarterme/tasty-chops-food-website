@@ -99,14 +99,12 @@ function buildMenuCard(item) {
       <div class="menu-card-body">
         <div class="menu-card-title">${item.name}</div>
         <div class="menu-card-desc">${item.desc}</div>
-        <div class="flex items-center justify-between mt-auto pt-2">
-          <span class="text-brand-red font-bold text-sm">₦${item.price.toLocaleString()}</span>
-          <button onclick="Cart.add('${item._id}')"
-            class="menu-card-order flex items-center gap-1">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
-            Add to Cart
-          </button>
-        </div>
+        <p class="text-brand-red font-bold text-base mb-3">₦${item.price.toLocaleString()}</p>
+        <button onclick="Cart.add('${item._id}')"
+          class="menu-card-order">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+          Add to Cart
+        </button>
       </div>
     </div>`;
 }
