@@ -71,10 +71,10 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ── Load and render menu from backend ────────────────────────────────────────
-let allProducts = [];
+let allProducts    = [];
 const MENU_PAGE_SIZE = 6;
-let currentMenuCat  = 'all';
-let visibleCount    = MENU_PAGE_SIZE;
+let currentMenuCat = 'all';
+let menuVisible    = MENU_PAGE_SIZE;
 
 async function loadMenu() {
   try {
@@ -113,36 +113,35 @@ function buildMenuCard(item) {
 
 function renderMenu(cat) {
   currentMenuCat = cat;
-  visibleCount   = MENU_PAGE_SIZE;
+  menuVisible    = MENU_PAGE_SIZE;
   _renderCards();
 }
 
 function showMoreProducts() {
-  visibleCount += MENU_PAGE_SIZE;
+  menuVisible += MENU_PAGE_SIZE;
   _renderCards(true);
 }
 
 function _renderCards(appending = false) {
-  const grid  = document.getElementById('menu-grid');
-  const wrap  = document.getElementById('view-more-wrap');
-  const label = document.getElementById('view-more-label');
-  const all   = currentMenuCat === 'all'
+  const grid      = document.getElementById('menu-grid');
+  const wrap      = document.getElementById('view-more-wrap');
+  const label     = document.getElementById('view-more-label');
+  const all       = currentMenuCat === 'all'
     ? allProducts
     : allProducts.filter(i => i.cat === currentMenuCat);
 
   if (all.length === 0) {
     grid.innerHTML = `<div class="col-span-4 text-center py-12 text-brand-charcoal/40">No items in this category yet.</div>`;
-    wrap.classList.add('hidden');
+    if (wrap) wrap.classList.add('hidden');
     return;
   }
 
-  const slice      = all.slice(0, visibleCount);
-  const remaining  = all.length - slice.length;
+  const slice     = all.slice(0, menuVisible);
+  const remaining = all.length - slice.length;
 
   if (!appending) grid.innerHTML = '';
 
-  // Only render newly added cards (avoid re-rendering existing ones)
-  const startIdx = appending ? visibleCount - MENU_PAGE_SIZE : 0;
+  const startIdx = appending ? menuVisible - MENU_PAGE_SIZE : 0;
   slice.slice(startIdx).forEach((item, idx) => {
     const el = document.createElement('div');
     el.innerHTML = buildMenuCard(item);
@@ -159,12 +158,13 @@ function _renderCards(appending = false) {
     });
   });
 
-  // Show / update "View More" button
-  if (remaining > 0) {
-    wrap.classList.remove('hidden');
-    label.textContent = `View More (${remaining} left)`;
-  } else {
-    wrap.classList.add('hidden');
+  if (wrap) {
+    if (remaining > 0) {
+      wrap.classList.remove('hidden');
+      if (label) label.textContent = `View More (${remaining} left)`;
+    } else {
+      wrap.classList.add('hidden');
+    }
   }
 }
 
@@ -299,8 +299,9 @@ slider.addEventListener('touchend', e => { const diff = touchStartX - e.changedT
 
 // ── Hero reveal ───────────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  document.querySelectorAll('.hero-bg ~ * .reveal, section#home .reveal').forEach((el, i) => {
-    setTimeout(() => el.classList.add('visible'), i * 100 + 300);
+  // Make ALL reveal elements visible — both hero and rest of page
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 80 + 200);
   });
   Auth.updateNavUI();
   Cart.load();
