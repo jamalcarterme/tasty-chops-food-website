@@ -72,6 +72,9 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ── Load and render menu from backend ────────────────────────────────────────
 let allProducts = [];
+const MENU_PAGE_SIZE = 6;
+let currentMenuCat  = 'all';
+let visibleCount    = MENU_PAGE_SIZE;
 
 async function loadMenu() {
   try {
@@ -80,7 +83,6 @@ async function loadMenu() {
     allProducts = data;
     renderMenu('all');
   } catch (err) {
-    // Fallback: show error state
     document.getElementById('menu-grid').innerHTML = `
       <div class="col-span-4 text-center py-16 text-brand-charcoal/50">
         <div class="text-4xl mb-4">😕</div>
@@ -110,14 +112,38 @@ function buildMenuCard(item) {
 }
 
 function renderMenu(cat) {
+  currentMenuCat = cat;
+  visibleCount   = MENU_PAGE_SIZE;
+  _renderCards();
+}
+
+function showMoreProducts() {
+  visibleCount += MENU_PAGE_SIZE;
+  _renderCards(true);
+}
+
+function _renderCards(appending = false) {
   const grid  = document.getElementById('menu-grid');
-  const items = cat === 'all' ? allProducts : allProducts.filter(i => i.cat === cat);
-  if (items.length === 0) {
+  const wrap  = document.getElementById('view-more-wrap');
+  const label = document.getElementById('view-more-label');
+  const all   = currentMenuCat === 'all'
+    ? allProducts
+    : allProducts.filter(i => i.cat === currentMenuCat);
+
+  if (all.length === 0) {
     grid.innerHTML = `<div class="col-span-4 text-center py-12 text-brand-charcoal/40">No items in this category yet.</div>`;
+    wrap.classList.add('hidden');
     return;
   }
-  grid.innerHTML = '';
-  items.forEach((item, idx) => {
+
+  const slice      = all.slice(0, visibleCount);
+  const remaining  = all.length - slice.length;
+
+  if (!appending) grid.innerHTML = '';
+
+  // Only render newly added cards (avoid re-rendering existing ones)
+  const startIdx = appending ? visibleCount - MENU_PAGE_SIZE : 0;
+  slice.slice(startIdx).forEach((item, idx) => {
     const el = document.createElement('div');
     el.innerHTML = buildMenuCard(item);
     const card = el.firstElementChild;
@@ -132,6 +158,14 @@ function renderMenu(cat) {
       }, idx * 60);
     });
   });
+
+  // Show / update "View More" button
+  if (remaining > 0) {
+    wrap.classList.remove('hidden');
+    label.textContent = `View More (${remaining} left)`;
+  } else {
+    wrap.classList.add('hidden');
+  }
 }
 
 document.querySelectorAll('.menu-tab').forEach(tab => {
