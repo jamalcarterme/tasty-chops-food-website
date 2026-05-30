@@ -5,6 +5,7 @@
 // showToast is defined in toast.js (loads first)
 
 // ── Auth modal ────────────────────────────────────────────────────────────────
+function showAuthModal(tab = 'login') {
   document.getElementById('auth-modal').classList.remove('hidden');
   switchAuthTab(tab);
   document.body.style.overflow = 'hidden';
@@ -190,9 +191,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     showToast(`Welcome back, ${user.name.split(' ')[0]}! 👋`, 'success');
     if (user.role === 'admin') {
       setTimeout(() => {
-        if (confirm('Admin account detected. Go to Admin Dashboard?')) {
-          window.location.href = 'admin/index.html';
-        }
+        showToast('Admin account detected. <a href="admin/index.html" style="text-decoration:underline;font-weight:bold;">Go to Dashboard →</a>', 'info');
       }, 500);
     }
   } catch (err) {
@@ -304,15 +303,22 @@ slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX;
 slider.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1)); });
 
 // ── Hero reveal ───────────────────────────────────────────────────────────────
-window.addEventListener('load', () => {
-  // Make ALL reveal elements visible — both hero and rest of page
+function makeAllVisible() {
   document.querySelectorAll('.reveal').forEach((el, i) => {
-    setTimeout(() => el.classList.add('visible'), i * 80 + 200);
+    setTimeout(() => el.classList.add('visible'), i * 60 + 100);
   });
+}
+
+// Run on DOMContentLoaded so content is never stuck invisible
+document.addEventListener('DOMContentLoaded', () => {
+  makeAllVisible();
   Auth.updateNavUI();
   Cart.load();
   loadMenu();
 });
+
+// Also run on load as a safety net
+window.addEventListener('load', makeAllVisible);
 
 // ── Active nav link on scroll ─────────────────────────────────────────────────
 const sections = document.querySelectorAll('section[id]');
