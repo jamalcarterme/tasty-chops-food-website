@@ -190,9 +190,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     hideAuthModal();
     showToast(`Welcome back, ${user.name.split(' ')[0]}! 👋`, 'success');
     if (user.role === 'admin') {
-      setTimeout(() => {
-        showToast('Admin account detected. <a href="admin/index.html" style="text-decoration:underline;font-weight:bold;">Go to Dashboard →</a>', 'info');
-      }, 500);
+      window.location.href = 'admin/index.html';
+      return;
     }
   } catch (err) {
     showToast(err.message, 'error');
