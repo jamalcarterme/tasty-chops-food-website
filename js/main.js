@@ -5,7 +5,6 @@
 // showToast is defined in toast.js (loads first)
 
 // ── Auth modal ────────────────────────────────────────────────────────────────
-function showAuthModal(tab = 'login') {
   document.getElementById('auth-modal').classList.remove('hidden');
   switchAuthTab(tab);
   document.body.style.overflow = 'hidden';
@@ -229,12 +228,19 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
 
 // ── Reviews data ─────────────────────────────────────────────────────────────
 const reviews = [
-  { name: 'Adaeze Okonkwo', initials: 'AO', date: '2 weeks ago', stars: 5, text: 'Tasty Chops is simply the best in Festac! Their small chops platter was the star of my daughter\'s birthday party. Guests kept asking who catered. Will definitely book again!' },
-  { name: 'Emeka Johnson',  initials: 'EJ', date: '1 month ago',  stars: 5, text: 'Ordered via WhatsApp and the experience was seamless. Food was delivered hot and on time. The suya and grilled chicken are absolutely amazing. A gem in Festac Town!' },
-  { name: 'Blessing Taiwo', initials: 'BT', date: '3 weeks ago',  stars: 5, text: 'Both the service and meals are delicious. I\'ve tried many food vendors in Festac but Tasty Chops stands out. The jollof rice is smoky and perfect every single time.' },
-  { name: 'Chidera Eze',    initials: 'CE', date: '1 month ago',  stars: 5, text: 'We used Tasty Chops for our office end-of-year party and they exceeded every expectation. Professional, prompt and the food? Absolutely outstanding. 10/10!' },
-  { name: 'Funmi Adeyemo',  initials: 'FA', date: '2 months ago', stars: 5, text: 'The puff puff and spring rolls are INCREDIBLE. Hot, crispy and so generously portioned. My family now orders every weekend. Best small chops in Festac hands down!' },
-  { name: 'Samuel Ogah',    initials: 'SO', date: '3 months ago', stars: 5, text: 'Catered our wedding reception and I couldn\'t be happier. Every dish was flawless, the team was professional and our guests are still talking about the food. Thank you!' },
+  { name: 'FAVOUR AKOR88',              initials: 'FA', date: '2 days ago',    stars: 5, text: 'Tasty chops foods & events for a reason 💯 It was everything I asked for and more 💗 I really enjoyed their service 🙏 Highly recommended 👍' },
+  { name: 'Patrick Onwordi',            initials: 'PO', date: '1 month ago',   stars: 5, text: 'Best Small Chops in Festac. Promises and delivers 💯💯' },
+  { name: 'Michael Okafor',             initials: 'MO', date: '3 months ago',  stars: 5, text: 'I had a great experience with Tasty Chops Foods & Events, Festac Lagos. I ordered small chops for my birthday even though I wasn\'t in town, and they delivered promptly despite the short notice.' },
+  { name: 'Orly Nmere',                 initials: 'ON', date: '7 months ago',  stars: 5, text: 'Delivered in time, and tastes so fresh and delicious, customer service is 9/10 ❤️' },
+  { name: 'Olukayode Ladenegan',        initials: 'OL', date: '8 months ago',  stars: 5, text: 'Good job, cheffo! Excellent.' },
+  { name: 'Solomon Ayoola Okeowo',      initials: 'SA', date: '8 months ago',  stars: 5, text: 'Good taste and affordable all at the same place, Tasty Chops Food is the place.' },
+  { name: 'Rebecca Okeowo',             initials: 'RO', date: '8 months ago',  stars: 5, text: 'Food taste so good and fresh.' },
+  { name: 'Daniel Chinwe',              initials: 'DC', date: '8 months ago',  stars: 5, text: 'Excellent and great customer service.' },
+  { name: 'Joy Onichakwe',              initials: 'JO', date: '8 months ago',  stars: 5, text: 'Nice place, great taste.' },
+  { name: 'Seraph Floxy',               initials: 'SF', date: '8 months ago',  stars: 5, text: 'The food and services are wow.' },
+  { name: 'Anaje Chiamaka',             initials: 'AC', date: '3 years ago',   stars: 5, text: 'Cool.' },
+  { name: 'Darlington Nebo',            initials: 'DN', date: '4 years ago',   stars: 5, text: 'Boss.. he is the best.' },
+  { name: 'Jeremiah Zenmaster George',  initials: 'JZ', date: '6 years ago',   stars: 5, text: 'Great shawarma and my friend swears by their pasta and noodles.' },
 ];
 
 function starsHTML(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
