@@ -76,26 +76,75 @@ const MENU_PAGE_SIZE = 6;
 let currentMenuCat = 'all';
 let menuVisible    = MENU_PAGE_SIZE;
 
+const PRODUCTS_CACHE_KEY = 'tc_products_cache';
+const PRODUCTS_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+function getCachedProducts() {
+  try {
+    const raw = localStorage.getItem(PRODUCTS_CACHE_KEY);
+    if (!raw) return null;
+    const { data, ts } = JSON.parse(raw);
+    if (Date.now() - ts > PRODUCTS_CACHE_TTL) return null;
+    return data;
+  } catch { return null; }
+}
+
+function setCachedProducts(data) {
+  try {
+    localStorage.setItem(PRODUCTS_CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+  } catch { /* storage full – skip */ }
+}
+
 async function loadMenu() {
+  // ── Step 1: Show cached data instantly (zero wait) ────────────────────────
+  const cached = getCachedProducts();
+  if (cached && cached.length > 0) {
+    allProducts = cached;
+    renderMenu(currentMenuCat);
+  } else {
+    // Show skeleton loaders while we wait for the first fetch
+    const grid = document.getElementById('menu-grid');
+    grid.innerHTML = Array(6).fill(0).map(() => `
+      <div class="menu-card animate-pulse">
+        <div class="menu-card-img bg-gray-200 h-48 rounded-t-2xl"></div>
+        <div class="menu-card-body space-y-3 p-4">
+          <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div class="h-3 bg-gray-200 rounded w-full"></div>
+          <div class="h-3 bg-gray-200 rounded w-5/6"></div>
+          <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  // ── Step 2: Fetch fresh data in background ────────────────────────────────
   try {
     const res  = await fetch(`${API_BASE}/products`);
     const data = await res.json();
+    // Only re-render if data changed (avoids flicker when cache was fresh)
+    const changed = JSON.stringify(data) !== JSON.stringify(allProducts);
     allProducts = data;
-    renderMenu('all');
+    setCachedProducts(data);
+    if (changed) renderMenu(currentMenuCat);
   } catch (err) {
-    document.getElementById('menu-grid').innerHTML = `
-      <div class="col-span-4 text-center py-16 text-brand-charcoal/50">
-        <div class="text-4xl mb-4">😕</div>
-        <p>Menu unavailable. Please try again later.</p>
-      </div>`;
+    // If we already showed cached data, silently swallow the error
+    if (allProducts.length === 0) {
+      document.getElementById('menu-grid').innerHTML = `
+        <div class="col-span-4 text-center py-16 text-brand-charcoal/50">
+          <div class="text-4xl mb-4">😕</div>
+          <p>Menu unavailable. Please try again later.</p>
+        </div>`;
+    }
   }
 }
 
+let _menuCardIndex = 0;
+
 function buildMenuCard(item) {
+  const loadAttr = _menuCardIndex++ < MENU_PAGE_SIZE ? 'eager' : 'lazy';
   return `
     <div class="menu-card" data-cat="${item.cat}">
       <div class="menu-card-img">
-        <img src="${item.img}" alt="${item.name}" loading="lazy"/>
+        <img src="${item.img}" alt="${item.name}" loading="${loadAttr}" decoding="async"/>
         ${item.badge ? `<span class="menu-badge">${item.badge}</span>` : ''}
       </div>
       <div class="menu-card-body">
@@ -114,6 +163,7 @@ function buildMenuCard(item) {
 function renderMenu(cat) {
   currentMenuCat = cat;
   menuVisible    = MENU_PAGE_SIZE;
+  _menuCardIndex = 0;
   _renderCards();
 }
 
