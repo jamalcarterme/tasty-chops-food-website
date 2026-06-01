@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Performance: pre-warm the backend connection so the first API call is faster -->
+  <link rel="preconnect" href="https://tasty-chops-backend.onrender.com" crossorigin />
+  <link rel="dns-prefetch" href="https://tasty-chops-backend.onrender.com" />
+
+  <!-- SEO Meta Tags -->
+  <title>Tasty Chops Foods & Events | Best Nigerian Food & Catering in Festac, Lagos</title>
+  <meta name="description" content="Tasty Chops Foods & Events — Festac Town's favourite for small chops, Nigerian meals, and full event catering. Order via WhatsApp: 0803 205 6675. Same-day delivery in Lagos." />
+  <meta name="keywords" content="Tasty Chops Festac, small chops Lagos, Nigerian catering Festac, event food Lagos, small chops delivery Festac, puff puff spring rolls samosa Lagos, party catering Festac Town, best food Festac Lagos" />
+  <meta name="author" content="Tasty Chops Foods & Events" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://tastychops.com.ng/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <meta name="theme-color" content="#C8281A" />
+  <meta name="msapplication-TileColor" content="#C8281A" />
+
+  <!-- Extra SEO: Geo + revisit -->
+  <meta name="geo.region" content="NG-LA" />
+  <meta name="geo.placename" content="Festac Town, Lagos" />
+  <meta name="geo.position" content="6.4616;3.2803" />
+  <meta name="ICBM" content="6.4616, 3.2803" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="Tasty Chops Foods & Events | Festac, Lagos" />
+  <meta property="og:description" content="Bold Nigerian flavours, irresistible small chops & full-service event catering in Festac Town, Lagos. Order on WhatsApp now!" />
+  <meta property="og:url" content="https://tastychops.com.ng/" />
+  <meta property="og:image" content="https://tastychops.com.ng/images/og-image.jpg" />
+  <meta property="og:locale" content="en_NG" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tasty Chops Foods & Events | Festac, Lagos" />
+  <meta name="twitter:description" content="Bold Nigerian flavours & event catering in Festac Town. Order on WhatsApp!" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Tasty Chops Foods & Events",
+    "image": "https://tastychops.com.ng/images/og-image.jpg",
+    "url": "https://tastychops.com.ng",
+    "telephone": "+2348032056675",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "House 19, 206 Road, A Close",
+      "addressLocality": "Festac Town",
+      "addressRegion": "Lagos",
+      "postalCode": "102102",
+      "addressCountry": "NG"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 6.4616,
+      "longitude": 3.2803
+    },
+    "servesCuisine": ["Nigerian", "African", "Small Chops", "Catering"],
+    "priceRange": "₦₦",
+    "openingHours": "Mo-Su 08:00-22:00",
+    "hasMenu": "https://tastychops.com.ng/#menu",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "120"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red:    '#C8281A',
+              orange: '#E85D04',
+              gold:   '#F4A035',
+              cream:  '#FDF6EC',
+              dark:   '#1A0A00',
+              charcoal: '#2D1A0E',
+            }
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body:    ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          animation: {
+            'fade-up':    'fadeUp 0.7s ease forwards',
+            'fade-in':    'fadeIn 0.6s ease forwards',
+            'slide-left': 'slideLeft 0.7s ease forwards',
+            'float':      'float 4s ease-in-out infinite',
+            'shimmer':    'shimmer 2.5s infinite',
+          },
+          keyframes: {
+            fadeUp:    { '0%': { opacity: 0, transform: 'translateY(30px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            fadeIn:    { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+            slideLeft: { '0%': { opacity: 0, transform: 'translateX(40px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } },
+            float:     { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            shimmer:   { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="font-body bg-brand-cream text-brand-dark">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 rounded-full bg-brand-red flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
+          <span class="text-white text-lg font-display font-black leading-none">TC</span>
+        </div>
+        <span class="font-display font-bold text-lg text-white hidden sm:block nav-logo-text transition-colors duration-300">Tasty Chops</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="#home"    class="nav-link">Home</a></li>
+        <li><a href="#about"   class="nav-link">About</a></li>
+        <li><a href="#menu"    class="nav-link">Menu</a></li>
+        <li><a href="#events"  class="nav-link">Events</a></li>
+        <li><a href="#reviews" class="nav-link">Reviews</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Desktop Right: Auth + Cart -->
+      <div class="hidden md:flex items-center gap-3">
+        <!-- Cart button -->
+        <button onclick="openCart()" class="relative text-white hover:text-brand-gold transition-colors p-2" aria-label="Cart">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+          <span class="cart-badge hidden absolute -top-1 -right-1 bg-brand-red text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
+        <!-- Auth buttons (shown when logged out) -->
+        <div id="nav-auth-btns" class="flex items-center gap-2">
+          <button onclick="showAuthModal('login')" class="text-white/80 hover:text-white text-sm font-medium transition-colors">Log In</button>
+          <button onclick="showAuthModal('signup')" class="bg-brand-red hover:bg-brand-orange text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-300 hover:scale-105">Sign Up</button>
+        </div>
+        <!-- User menu (shown when logged in) -->
+        <div id="nav-user-menu" class="hidden flex items-center gap-2">
+          <span class="text-white/70 text-sm">Hi, <span id="nav-user-name" class="text-brand-gold font-semibold"></span></span>
+          <button onclick="Auth.logout()" class="text-white/50 hover:text-brand-red text-xs transition-colors">Logout</button>
+        </div>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <div class="md:hidden flex items-center gap-3">
+        <button onclick="openCart()" class="relative text-white p-1">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+          <span class="cart-badge hidden absolute -top-1 -right-1 bg-brand-red text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
+        <button id="menu-btn" class="text-white p-1 focus:outline-none" aria-label="Open menu">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line my-1.5"></div>
+          <div class="hamburger-line"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-brand-dark/95 backdrop-blur-md border-t border-white/10 px-5 pb-5 pt-3">
+      <ul class="space-y-3 mb-5">
+        <li><a href="#home"    class="mobile-nav-link" onclick="closeMobileMenu()">Home</a></li>
+        <li><a href="#about"   class="mobile-nav-link" onclick="closeMobileMenu()">About</a></li>
+        <li><a href="#menu"    class="mobile-nav-link" onclick="closeMobileMenu()">Menu</a></li>
+        <li><a href="#events"  class="mobile-nav-link" onclick="closeMobileMenu()">Events</a></li>
+        <li><a href="#reviews" class="mobile-nav-link" onclick="closeMobileMenu()">Reviews</a></li>
+        <li><a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">Contact</a></li>
+      </ul>
+      <!-- Mobile auth (logged out) -->
+      <div id="mobile-auth-btns" class="flex gap-2 mb-3">
+        <button onclick="showAuthModal('login'); closeMobileMenu();" class="flex-1 text-white border border-white/30 text-sm font-medium py-2.5 rounded-full hover:bg-white/10 transition-colors">Log In</button>
+        <button onclick="showAuthModal('signup'); closeMobileMenu();" class="flex-1 bg-brand-red text-white text-sm font-semibold py-2.5 rounded-full hover:bg-brand-orange transition-colors">Sign Up</button>
+      </div>
+      <!-- Mobile user (logged in) -->
+      <div id="mobile-user-menu" class="hidden flex items-center justify-between mb-3 bg-white/5 rounded-xl px-4 py-2.5">
+        <span class="text-white/80 text-sm">Hi, <span id="mobile-user-name" class="text-brand-gold font-semibold"></span>!</span>
+        <button onclick="Auth.logout(); closeMobileMenu();" class="text-xs text-white/40 hover:text-brand-red transition-colors">Logout</button>
+      </div>
+      <a href="https://wa.me/2348032056675?text=Hi%2C%20I%20want%20to%20place%20an%20order%20from%20Tasty%20Chops!" target="_blank" rel="noopener"
+         class="flex items-center justify-center gap-2 bg-green-500 text-white font-semibold px-5 py-3 rounded-full w-full text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Background -->
+    <div class="hero-bg absolute inset-0"></div>
+    <div class="hero-overlay absolute inset-0"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute top-1/4 right-10 w-64 h-64 rounded-full bg-brand-orange/20 blur-3xl animate-float"></div>
+    <div class="absolute bottom-1/4 left-10 w-48 h-48 rounded-full bg-brand-red/20 blur-3xl animate-float" style="animation-delay:1.5s"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-5 md:px-8 pt-24 pb-16 w-full">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Text -->
+        <div class="text-white">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-brand-gold text-xs font-semibold px-4 py-2 rounded-full mb-6 reveal">
+            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            Now Taking Orders · Festac Town, Lagos
+          </div>
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] mb-6 reveal" style="animation-delay:.1s">
+            Bold Flavours,<br/>
+            <em class="text-brand-gold not-italic">Every Bite</em><br/>
+            Tells a Story
+          </h1>
+          <p class="text-white/75 text-lg md:text-xl max-w-md mb-10 leading-relaxed reveal" style="animation-delay:.2s">
+            Festac's most loved chops, local meals & full-service event catering. Crafted with passion, delivered with love — right to your door or event venue.
+          </p>
+          <div class="flex flex-wrap gap-4 reveal" style="animation-delay:.3s">
+            <a href="https://wa.me/2348032056675?text=Hi%2C%20I%20want%20to%20order%20from%20Tasty%20Chops!" target="_blank" rel="noopener"
+               class="flex items-center gap-3 bg-brand-red hover:bg-brand-orange text-white font-semibold px-7 py-4 rounded-full transition-all duration-300 shadow-2xl hover:shadow-brand-red/50 hover:scale-105 active:scale-95 text-base">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              Order on WhatsApp
+            </a>
+            <a href="#menu"
+               class="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-7 py-4 rounded-full transition-all duration-300 text-base">
+              View Menu
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="flex flex-wrap gap-8 mt-12 reveal" style="animation-delay:.4s">
+            <div>
+              <div class="font-display font-black text-3xl text-brand-gold">500+</div>
+              <div class="text-white/60 text-sm">Happy Clients</div>
+            </div>
+            <div class="w-px bg-white/20"></div>
+            <div>
+              <div class="font-display font-black text-3xl text-brand-gold">100+</div>
+              <div class="text-white/60 text-sm">Events Catered</div>
+            </div>
+            <div class="w-px bg-white/20"></div>
+            <div>
+              <div class="font-display font-black text-3xl text-brand-gold">4.8★</div>
+              <div class="text-white/60 text-sm">Google Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero food image -->
+        <div class="hidden md:flex justify-center items-center relative reveal" style="animation-delay:.3s">
+          <div class="hero-food-ring absolute w-96 h-96 rounded-full border-2 border-brand-gold/30"></div>
+          <div class="hero-food-ring-2 absolute w-80 h-80 rounded-full border border-brand-orange/20"></div>
+          <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80"
+               alt="Delicious Nigerian small chops and finger foods"
+               class="w-72 h-72 object-cover rounded-full border-4 border-brand-gold/50 shadow-2xl shadow-brand-red/30 animate-float"
+               loading="eager" />
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -right-4 bg-brand-red text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg rotate-12 animate-float" style="animation-delay:.8s">
+            🔥 Hot & Fresh
+          </div>
+          <div class="absolute -bottom-2 -left-4 bg-brand-gold text-brand-dark text-xs font-bold px-4 py-2 rounded-full shadow-lg -rotate-6 animate-float" style="animation-delay:1.2s">
+            📦 Event Ready
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+      <span class="text-xs tracking-widest uppercase">Scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-white/40 to-transparent scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE STRIP ===== -->
+  <div class="bg-brand-red overflow-hidden py-3 relative z-10">
+    <div class="marquee-track flex gap-0 whitespace-nowrap">
+      <div class="marquee-content flex gap-12 text-white text-sm font-semibold tracking-wide">
+        <span>🍢 Small Chops</span><span>•</span>
+        <span>🍗 Grilled Chicken</span><span>•</span>
+        <span>🦐 Peppered Snails</span><span>•</span>
+        <span>🥟 Spring Rolls</span><span>•</span>
+        <span>🧆 Samosa</span><span>•</span>
+        <span>🍡 Puff Puff</span><span>•</span>
+        <span>🐟 Smoked Catfish</span><span>•</span>
+        <span>🍖 Suya</span><span>•</span>
+        <span>🥘 Local Dishes</span><span>•</span>
+        <span>🎉 Event Catering</span><span>•</span>
+      </div>
+      <!-- Duplicated for seamless loop -->
+      <div class="marquee-content flex gap-12 text-white text-sm font-semibold tracking-wide" aria-hidden="true">
+        <span>🍢 Small Chops</span><span>•</span>
+        <span>🍗 Grilled Chicken</span><span>•</span>
+        <span>🦐 Peppered Snails</span><span>•</span>
+        <span>🥟 Spring Rolls</span><span>•</span>
+        <span>🧆 Samosa</span><span>•</span>
+        <span>🍡 Puff Puff</span><span>•</span>
+        <span>🐟 Smoked Catfish</span><span>•</span>
+        <span>🍖 Suya</span><span>•</span>
+        <span>🥘 Local Dishes</span><span>•</span>
+        <span>🎉 Event Catering</span><span>•</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="py-24 bg-white relative overflow-hidden">
+    <div class="absolute right-0 top-0 w-1/3 h-full bg-brand-cream/60 clip-diagonal"></div>
+    <div class="max-w-7xl mx-auto px-5 md:px-8 relative">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <!-- Images mosaic -->
+        <div class="relative reveal">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=400&q=80"
+                 alt="Nigerian party small chops platter"
+                 class="rounded-2xl object-cover w-full h-48 md:h-56 shadow-lg hover:scale-105 transition-transform duration-500" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&q=80"
+                 alt="Finger foods spring rolls"
+                 class="rounded-2xl object-cover w-full h-48 md:h-56 shadow-lg hover:scale-105 transition-transform duration-500 mt-8" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80"
+                 alt="Grilled chicken and BBQ"
+                 class="rounded-2xl object-cover w-full h-48 md:h-56 shadow-lg hover:scale-105 transition-transform duration-500 -mt-4" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=80"
+                 alt="Event catering buffet setup"
+                 class="rounded-2xl object-cover w-full h-48 md:h-56 shadow-lg hover:scale-105 transition-transform duration-500 mt-4" loading="lazy"/>
+          </div>
+          <!-- Floating badge -->
+          <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-brand-red text-white font-bold text-sm px-6 py-3 rounded-full shadow-xl whitespace-nowrap">
+            ⭐ Festac's Favourite Food Spot
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="reveal" style="animation-delay:.15s">
+          <span class="inline-block text-brand-red font-semibold text-sm uppercase tracking-widest mb-4">Our Story</span>
+          <h2 class="font-display text-4xl md:text-5xl font-black leading-tight mb-6">
+            Real Food, Real <span class="text-brand-red">Flavour</span>, Real Love
+          </h2>
+          <p class="text-brand-charcoal/70 text-lg leading-relaxed mb-6">
+            Located at <strong>House 19, 206 Road, A Close, Festac Town, Lagos</strong>, Tasty Chops Foods & Events has become the neighbourhood's most-loved destination for authentic Nigerian chops and event catering.
+          </p>
+          <p class="text-brand-charcoal/70 leading-relaxed mb-8">
+            From crispy puff-puff to perfectly seasoned suya, from intimate birthday spreads to full wedding buffets — every bite we serve is made with fresh ingredients, bold spices and genuine passion. We handle everything so you enjoy the moment.
+          </p>
+
+          <!-- Icons row -->
+          <div class="grid grid-cols-2 gap-4 mb-10">
+            <div class="about-icon-card">
+              <span class="text-2xl">🥘</span>
+              <div>
+                <div class="font-semibold text-sm">Local Dishes</div>
+                <div class="text-xs text-brand-charcoal/50">Authentic Nigerian recipes</div>
+              </div>
+            </div>
+            <div class="about-icon-card">
+              <span class="text-2xl">🎉</span>
+              <div>
+                <div class="font-semibold text-sm">Event Catering</div>
+                <div class="text-xs text-brand-charcoal/50">Weddings, birthdays & more</div>
+              </div>
+            </div>
+            <div class="about-icon-card">
+              <span class="text-2xl">🚚</span>
+              <div>
+                <div class="font-semibold text-sm">Fast Delivery</div>
+                <div class="text-xs text-brand-charcoal/50">Lagos-wide, same day</div>
+              </div>
+            </div>
+            <div class="about-icon-card">
+              <span class="text-2xl">✅</span>
+              <div>
+                <div class="font-semibold text-sm">Quality Assured</div>
+                <div class="text-xs text-brand-charcoal/50">Hygienically prepared</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://wa.me/2348032056675?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20Tasty%20Chops!" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-orange text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 hover:scale-105 shadow-lg shadow-brand-red/30">
+            Chat With Us
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section id="menu" class="py-24 bg-brand-cream relative overflow-hidden">
+    <div class="absolute inset-0 menu-bg-texture opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-5 md:px-8 relative">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-brand-red font-semibold text-sm uppercase tracking-widest mb-4">What We Serve</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black leading-tight">
+          Our <span class="text-brand-red">Menu</span>
+        </h2>
+        <p class="text-brand-charcoal/60 mt-4 max-w-lg mx-auto">Every item made fresh, every order packed with care. Tap any item to order instantly on WhatsApp.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10 reveal">
+        <button class="menu-tab active" data-cat="all">All Items</button>
+        <button class="menu-tab" data-cat="small-chops">Small Chops</button>
+        <button class="menu-tab" data-cat="grills">Grills & BBQ</button>
+        <button class="menu-tab" data-cat="local">Local Dishes</button>
+        <button class="menu-tab" data-cat="packs">Event Packs</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6" id="menu-grid">
+        <!-- Items injected by JS -->
+      </div>
+
+      <!-- View More Button -->
+      <div id="view-more-wrap" class="hidden text-center mt-10">
+        <button id="view-more-btn" onclick="showMoreProducts()"
+          class="inline-flex items-center gap-2 bg-white border-2 border-brand-red text-brand-red font-bold px-8 py-3.5 rounded-full hover:bg-brand-red hover:text-white transition-all duration-300 hover:scale-105 shadow-md text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          <span id="view-more-label">View More</span>
+        </button>
+      </div>
+
+      <!-- WhatsApp CTA -->
+      <div class="text-center mt-14 reveal">
+        <p class="text-brand-charcoal/60 mb-5">Don't see what you're looking for? We can customise your order!</p>
+        <a href="https://wa.me/2348032056675?text=Hi%20Tasty%20Chops!%20I%20want%20to%20order%20from%20your%20menu.%20Please%20share%20your%20full%20price%20list." target="_blank" rel="noopener"
+           class="inline-flex items-center gap-3 bg-brand-dark hover:bg-brand-charcoal text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-xl text-base">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Get Full Price List on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW TO ORDER ===== -->
+  <section class="py-20 bg-brand-dark text-white relative overflow-hidden">
+    <div class="absolute inset-0 order-bg"></div>
+    <div class="max-w-5xl mx-auto px-5 md:px-8 relative">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-brand-gold font-semibold text-sm uppercase tracking-widest mb-4">Simple & Fast</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black">How to Order</h2>
+        <p class="text-white/60 mt-4">Get your favourite chops in 3 easy steps</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="order-step reveal" style="animation-delay:0s">
+          <div class="step-number">01</div>
+          <div class="text-4xl mb-4">💬</div>
+          <h3 class="font-display font-bold text-xl mb-3">Message Us</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Tap the WhatsApp button and send us your order. Our friendly team responds in minutes.</p>
+        </div>
+        <div class="order-step reveal" style="animation-delay:.1s">
+          <div class="step-number">02</div>
+          <div class="text-4xl mb-4">🛒</div>
+          <h3 class="font-display font-bold text-xl mb-3">Confirm & Pay</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Choose your items from our menu, confirm quantity and pay securely via bank transfer or cash.</p>
+        </div>
+        <div class="order-step reveal" style="animation-delay:.2s">
+          <div class="step-number">03</div>
+          <div class="text-4xl mb-4">🎁</div>
+          <h3 class="font-display font-bold text-xl mb-3">Enjoy!</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Receive your hot, freshly prepared order at your doorstep or event venue. Bon appétit!</p>
+        </div>
+      </div>
+      <div class="text-center mt-12 reveal">
+        <a href="https://wa.me/2348032056675?text=Hi%20Tasty%20Chops%2C%20I%20want%20to%20place%20an%20order!" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-400 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 text-base shadow-2xl shadow-green-500/30">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Start Your Order Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EVENTS ===== -->
+  <section id="events" class="py-24 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-brand-red font-semibold text-sm uppercase tracking-widest mb-4">Full-Service</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black">
+          We Cater <span class="text-brand-red">Your Events</span>
+        </h2>
+        <p class="text-brand-charcoal/60 mt-4 max-w-xl mx-auto">From intimate birthday dinners to large corporate gatherings — we bring the food, you enjoy the vibes.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="event-card reveal">
+          <div class="event-card-img">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80"
+                 alt="Wedding catering Lagos" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          </div>
+          <div class="event-card-body">
+            <h3 class="font-display font-bold text-xl mb-2">Weddings</h3>
+            <p class="text-sm text-brand-charcoal/60 leading-relaxed mb-4">Elegant buffets, beautiful food displays and impeccable service for your special day.</p>
+            <a href="https://wa.me/2348032056675?text=Hi%2C%20I%27d%20like%20to%20book%20Tasty%20Chops%20for%20my%20wedding." target="_blank" rel="noopener" class="event-cta">Book Now →</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal" style="animation-delay:.1s">
+          <div class="event-card-img">
+            <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80"
+                 alt="Birthday party catering" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          </div>
+          <div class="event-card-body">
+            <h3 class="font-display font-bold text-xl mb-2">Birthdays & Parties</h3>
+            <p class="text-sm text-brand-charcoal/60 leading-relaxed mb-4">Small chops trays, cocktails and full chops packages that make every party unforgettable.</p>
+            <a href="https://wa.me/2348032056675?text=Hi%2C%20I%27d%20like%20to%20book%20Tasty%20Chops%20for%20a%20birthday%20party." target="_blank" rel="noopener" class="event-cta">Book Now →</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal" style="animation-delay:.2s">
+          <div class="event-card-img">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80"
+                 alt="Corporate catering Lagos" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+          </div>
+          <div class="event-card-body">
+            <h3 class="font-display font-bold text-xl mb-2">Corporate Events</h3>
+            <p class="text-sm text-brand-charcoal/60 leading-relaxed mb-4">Professional catering for office lunches, conferences, product launches and company events.</p>
+            <a href="https://wa.me/2348032056675?text=Hi%2C%20I%27d%20like%20to%20book%20Tasty%20Chops%20for%20a%20corporate%20event." target="_blank" rel="noopener" class="event-cta">Book Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Packages Banner -->
+      <div class="mt-14 event-banner reveal">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="font-display font-black text-2xl md:text-3xl text-white mb-2">Need a Custom Package?</h3>
+            <p class="text-white/70">We tailor every order to your event size, budget and taste preferences.</p>
+          </div>
+          <a href="https://wa.me/2348032056675?text=Hi%20Tasty%20Chops%2C%20I%20need%20a%20custom%20event%20catering%20package!" target="_blank" rel="noopener"
+             class="flex-shrink-0 flex items-center gap-3 bg-white text-brand-red font-bold px-7 py-4 rounded-full hover:bg-brand-cream transition-all duration-300 hover:scale-105 shadow-xl whitespace-nowrap">
+            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Get a Custom Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="py-20 bg-brand-cream">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block text-brand-red font-semibold text-sm uppercase tracking-widest mb-4">Food Gallery</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black">Made With <span class="text-brand-red">Love</span></h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item tall reveal">
+          <img src="https://images.unsplash.com/photo-1592861956120-e524fc739696?w=600&q=80" alt="Nigerian small chops" loading="lazy"/>
+          <div class="gallery-overlay">Small Chops Platter</div>
+        </div>
+        <div class="gallery-item reveal" style="animation-delay:.05s">
+          <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" alt="Grilled chicken" loading="lazy"/>
+          <div class="gallery-overlay">Grilled Chicken</div>
+        </div>
+        <div class="gallery-item reveal" style="animation-delay:.1s">
+          <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&q=80" alt="Spring rolls" loading="lazy"/>
+          <div class="gallery-overlay">Crispy Spring Rolls</div>
+        </div>
+        <div class="gallery-item wide reveal" style="animation-delay:.15s">
+          <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&q=80" alt="Event buffet" loading="lazy"/>
+          <div class="gallery-overlay">Event Buffet Setup</div>
+        </div>
+        <div class="gallery-item reveal" style="animation-delay:.2s">
+          <img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=400&q=80" alt="Nigerian party food" loading="lazy"/>
+          <div class="gallery-overlay">Party Special</div>
+        </div>
+        <div class="gallery-item reveal" style="animation-delay:.25s">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Nigerian cuisine" loading="lazy"/>
+          <div class="gallery-overlay">Signature Dish</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section id="reviews" class="py-24 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-brand-red font-semibold text-sm uppercase tracking-widest mb-4">Testimonials</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black">
+          What Our <span class="text-brand-red">Customers</span> Say
+        </h2>
+        <div class="flex items-center justify-center gap-2 mt-4">
+          <div class="flex">
+            <span class="text-brand-gold text-xl">★★★★★</span>
+          </div>
+          <span class="font-bold text-brand-dark">4.7</span>
+          <span class="text-brand-charcoal/50 text-sm">· 22 Google Reviews</span>
+        </div>
+      </div>
+
+      <div class="reviews-track overflow-hidden">
+        <div class="reviews-slider flex gap-6" id="reviews-slider">
+          <!-- injected by JS -->
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="flex justify-center gap-2 mt-8" id="review-dots"></div>
+    </div>
+  </section>
+
+  <!-- ===== WHY US ===== -->
+  <section class="py-20 bg-brand-cream">
+    <div class="max-w-6xl mx-auto px-5 md:px-8">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-brand-red font-semibold text-sm uppercase tracking-widest mb-4">Why Choose Us</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black">The Tasty Chops <span class="text-brand-red">Difference</span></h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="why-card reveal">
+          <div class="why-icon">🌶️</div>
+          <h3 class="font-bold text-base mb-1">Bold & Authentic</h3>
+          <p class="text-xs text-brand-charcoal/60 leading-relaxed">Traditional Nigerian flavours with no shortcuts</p>
+        </div>
+        <div class="why-card reveal" style="animation-delay:.08s">
+          <div class="why-icon">🧼</div>
+          <h3 class="font-bold text-base mb-1">Hygienically Made</h3>
+          <p class="text-xs text-brand-charcoal/60 leading-relaxed">Food safety is our priority in every kitchen process</p>
+        </div>
+        <div class="why-card reveal" style="animation-delay:.16s">
+          <div class="why-icon">⚡</div>
+          <h3 class="font-bold text-base mb-1">Fast Turnaround</h3>
+          <p class="text-xs text-brand-charcoal/60 leading-relaxed">We respect your time with on-schedule delivery</p>
+        </div>
+        <div class="why-card reveal" style="animation-delay:.24s">
+          <div class="why-icon">💰</div>
+          <h3 class="font-bold text-base mb-1">Great Value</h3>
+          <p class="text-xs text-brand-charcoal/60 leading-relaxed">Premium quality at prices that make sense for you</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="py-24 bg-brand-dark text-white relative overflow-hidden">
+    <div class="absolute inset-0 contact-bg opacity-30"></div>
+    <div class="max-w-6xl mx-auto px-5 md:px-8 relative">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-brand-gold font-semibold text-sm uppercase tracking-widest mb-4">Get In Touch</span>
+        <h2 class="font-display text-4xl md:text-5xl font-black">Find Us &amp; <span class="text-brand-gold">Order</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <!-- Contact Info -->
+        <div class="reveal">
+          <div class="space-y-6">
+            <div class="contact-info-card">
+              <div class="contact-icon">📍</div>
+              <div>
+                <div class="font-semibold text-white mb-1">Location</div>
+                <div class="text-white/60 text-sm">House 19, 206 Road, A Close,<br/>Festac Town, Lagos 102102</div>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-icon">📞</div>
+              <div>
+                <div class="font-semibold text-white mb-1">Phone / WhatsApp</div>
+                <a href="tel:+2348032056675" class="text-brand-gold hover:text-brand-orange transition-colors text-sm font-medium">0803 205 6675</a>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-icon">🕐</div>
+              <div>
+                <div class="font-semibold text-white mb-1">Opening Hours</div>
+                <div class="text-white/60 text-sm">Monday – Sunday<br/>8:00 AM – 10:00 PM</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WhatsApp Quick Order -->
+          <div class="mt-8 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <h3 class="font-display font-bold text-xl mb-3">Quick Order on WhatsApp</h3>
+            <p class="text-white/60 text-sm mb-5">Tap below to start a conversation and place your order in seconds.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="https://wa.me/2348032056675?text=Hi%20Tasty%20Chops%2C%20I%20want%20to%20place%20an%20order!" target="_blank" rel="noopener"
+                 class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-white font-semibold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:scale-105">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                Order Food Now
+              </a>
+              <a href="https://wa.me/2348032056675?text=Hi%20Tasty%20Chops%2C%20I%20need%20a%20quote%20for%20an%20event!" target="_blank" rel="noopener"
+                 class="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3 rounded-full text-sm transition-all duration-300">
+                Book for Event
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map embed -->
+        <div class="reveal" style="animation-delay:.15s">
+          <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-80 md:h-full min-h-[350px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.6286!2d3.279!3d6.461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b893b2e23eff7%3A0x7e0cdb5d57800651!2sTasty%20Chops%20Foods%20%26%20Events!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Tasty Chops Foods & Events location on Google Maps">
+            </iframe>
+          </div>
+          <a href="https://maps.app.goo.gl/PCS2JAgvaxmHE7Jq6" target="_blank" rel="noopener"
+             class="flex items-center justify-center gap-2 mt-4 text-brand-gold hover:text-brand-orange text-sm font-medium transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+            Get Directions on Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AUTH MODAL ===== -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-[9000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="hideAuthModal()"></div>
+    <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+      <!-- Close -->
+      <button onclick="hideAuthModal()" class="absolute top-4 right-4 text-brand-charcoal/40 hover:text-brand-red transition-colors z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Logo -->
+      <div class="bg-brand-dark px-8 pt-8 pb-6 text-center">
+        <div class="w-12 h-12 rounded-full bg-brand-red mx-auto flex items-center justify-center mb-3">
+          <span class="text-white text-xl font-display font-black">TC</span>
+        </div>
+        <p class="text-white/60 text-sm">Festac's Favourite Food Spot</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex border-b border-brand-cream">
+        <button id="tab-login"  onclick="switchAuthTab('login')"  class="flex-1 py-3.5 text-sm font-semibold transition-colors active-tab">Log In</button>
+        <button id="tab-signup" onclick="switchAuthTab('signup')" class="flex-1 py-3.5 text-sm font-semibold transition-colors">Sign Up</button>
+      </div>
+
+      <div class="p-8">
+        <!-- Login Form -->
+        <div id="login-form-wrap">
+          <form id="login-form">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-brand-charcoal/60 mb-1.5 uppercase tracking-wide">Email Address</label>
+              <input id="login-email" type="email" required placeholder="you@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-brand-cream bg-brand-cream/50 text-brand-dark text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-brand-charcoal/60 mb-1.5 uppercase tracking-wide">Password</label>
+              <input id="login-password" type="password" required placeholder="••••••••"
+                class="w-full px-4 py-3 rounded-xl border border-brand-cream bg-brand-cream/50 text-brand-dark text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"/>
+            </div>
+          </div>
+          <button id="login-btn" type="submit"
+            class="mt-6 w-full bg-brand-red hover:bg-brand-orange text-white font-bold py-3.5 rounded-xl transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100">
+            Log In
+          </button>
+          <p class="text-center text-sm text-brand-charcoal/50 mt-4">
+            No account? <button type="button" onclick="switchAuthTab('signup')" class="text-brand-red font-semibold hover:underline">Sign up free</button>
+          </p>
+          </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form-wrap" class="hidden">
+          <form id="signup-form">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-brand-charcoal/60 mb-1.5 uppercase tracking-wide">Full Name</label>
+              <input id="signup-name" type="text" required placeholder="Your full name"
+                class="w-full px-4 py-3 rounded-xl border border-brand-cream bg-brand-cream/50 text-brand-dark text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-brand-charcoal/60 mb-1.5 uppercase tracking-wide">Email Address</label>
+              <input id="signup-email" type="email" required placeholder="you@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-brand-cream bg-brand-cream/50 text-brand-dark text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-brand-charcoal/60 mb-1.5 uppercase tracking-wide">Phone (optional)</label>
+              <input id="signup-phone" type="tel" placeholder="0803 000 0000"
+                class="w-full px-4 py-3 rounded-xl border border-brand-cream bg-brand-cream/50 text-brand-dark text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-brand-charcoal/60 mb-1.5 uppercase tracking-wide">Password</label>
+              <input id="signup-password" type="password" required placeholder="Min. 6 characters" minlength="6"
+                class="w-full px-4 py-3 rounded-xl border border-brand-cream bg-brand-cream/50 text-brand-dark text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"/>
+            </div>
+          </div>
+          <button id="signup-btn" type="submit"
+            class="mt-6 w-full bg-brand-red hover:bg-brand-orange text-white font-bold py-3.5 rounded-xl transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100">
+            Create Account
+          </button>
+          <p class="text-center text-sm text-brand-charcoal/50 mt-4">
+            Have an account? <button type="button" onclick="switchAuthTab('login')" class="text-brand-red font-semibold hover:underline">Log in</button>
+          </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CART PANEL ===== -->
+  <div id="cart-overlay" class="hidden fixed inset-0 bg-brand-dark/60 backdrop-blur-sm z-[8000]" onclick="closeCart()"></div>
+  <div id="cart-panel" class="fixed right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl z-[8500] translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between px-6 py-5 border-b border-brand-cream bg-brand-dark text-white">
+      <div class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+        <h2 class="font-display font-bold text-lg">Your Cart</h2>
+      </div>
+      <button onclick="closeCart()" class="text-white/50 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <!-- Items -->
+    <div id="cart-content" class="flex-1 overflow-y-auto px-6 py-4"></div>
+    <!-- Checkout -->
+    <div class="px-6 pb-6 pt-4 border-t border-brand-cream">
+      <button id="cart-checkout-btn" onclick="Cart.checkout(); closeCart();" class="hidden w-full bg-green-500 hover:bg-green-400 text-white font-bold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3 text-base shadow-xl shadow-green-500/30">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Checkout on WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-brand-dark border-t border-white/10 py-10 text-white">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-brand-red flex items-center justify-center">
+            <span class="text-white text-sm font-display font-black">TC</span>
+          </div>
+          <span class="font-display font-bold text-white">Tasty Chops Foods &amp; Events</span>
+        </div>
+        <div class="text-white/50 text-sm text-center">
+          📍 House 19, 206 Road, A Close, Festac Town, Lagos &nbsp;|&nbsp; 📞 <a href="tel:+2348032056675" class="text-brand-gold hover:text-brand-orange transition-colors">0803 205 6675</a>
+        </div>
+        <div class="text-white/30 text-xs">© 2026 Tasty Chops Foods &amp; Events. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/2348032056675?text=Hi%20Tasty%20Chops%2C%20I%20want%20to%20place%20an%20order!" target="_blank" rel="noopener"
+     class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl shadow-green-500/40 hover:scale-110 transition-all duration-300 active:scale-95"
+     aria-label="Chat on WhatsApp">
+    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.116 1.523 5.849L.057 23.857a.5.5 0 0 0 .614.601l6.197-1.617A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.486-5.191-1.341l-.371-.217-3.842 1.001 1.027-3.756-.236-.388A9.961 9.961 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
+
+  <script src="js/toast.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
