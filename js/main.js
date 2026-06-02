@@ -226,6 +226,18 @@ document.querySelectorAll('.menu-tab').forEach(tab => {
   });
 });
 
+// ── Admin persistent session: redirect to dashboard if still logged in ────────
+(function checkAdminSession() {
+  try {
+    const token = localStorage.getItem('tc_token');
+    const user  = JSON.parse(localStorage.getItem('tc_user') || 'null');
+    if (token && user && user.role === 'admin') {
+      // Admin session exists and they never logged out — send them back
+      window.location.href = 'admin/index.html';
+    }
+  } catch(e) { /* ignore */ }
+})();
+
 // ── Login form submit ─────────────────────────────────────────────────────────
 document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -234,16 +246,20 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   const pass  = document.getElementById('login-password').value;
   btn.disabled = true;
   btn.textContent = 'Logging in…';
+  Loader.show('Logging you in…');
   try {
     const user = await Auth.login(email, pass);
     await Cart.load();
     hideAuthModal();
-    showToast(`Welcome back, ${user.name.split(' ')[0]}! 👋`, 'success');
     if (user.role === 'admin') {
+      Loader.show('Redirecting to dashboard…');
       window.location.href = 'admin/index.html';
       return;
     }
+    Loader.hide();
+    showToast(`Welcome back, ${user.name.split(' ')[0]}! 👋`, 'success');
   } catch (err) {
+    Loader.hide();
     showToast(err.message, 'error');
   } finally {
     btn.disabled = false;
@@ -261,12 +277,15 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
   const pass  = document.getElementById('signup-password').value;
   btn.disabled = true;
   btn.textContent = 'Creating account…';
+  Loader.show('Creating your account…');
   try {
     const user = await Auth.signup(name, email, pass, phone);
     await Cart.load();
     hideAuthModal();
+    Loader.hide();
     showToast(`Account created! Welcome, ${user.name.split(' ')[0]}! 🎉`, 'success');
   } catch (err) {
+    Loader.hide();
     showToast(err.message, 'error');
   } finally {
     btn.disabled = false;
