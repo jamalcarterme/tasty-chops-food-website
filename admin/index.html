@@ -6,6 +6,7 @@
   <title>Admin Dashboard — Tasty Chops</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
   <meta name="theme-color" content="#C8281A" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -325,6 +326,7 @@
 
 <script src="../js/toast.js"></script>
 <script src="../js/config.js"></script>
+<script src="../js/loader.js"></script>
 <script>
   // ── Auth guard ──────────────────────────────────────────────────────────────
   const token = localStorage.getItem('tc_token');
@@ -452,6 +454,7 @@
     if (!img) { toast('Please upload an image', 'error'); btn.disabled=false; btn.textContent='Upload Product'; return; }
     fd.append('image', img);
 
+    Loader.show('Uploading product…');
     try {
       const res  = await fetch(`${API_BASE}/products`, { method:'POST', headers:authH(), body:fd });
       const data = await res.json();
@@ -465,6 +468,7 @@
     } catch(err) {
       toast(err.message || 'Upload failed', 'error');
     } finally {
+      Loader.hide();
       btn.disabled=false; btn.textContent='Upload Product';
     }
   });
@@ -504,6 +508,7 @@
     const img = document.getElementById('edit-image').files[0];
     if (img) fd.append('image', img);
 
+    Loader.show('Saving changes…');
     try {
       const res  = await fetch(`${API_BASE}/products/${id}`, { method:'PATCH', headers:authH(), body:fd });
       const data = await res.json();
@@ -514,6 +519,7 @@
     } catch(err) {
       toast(err.message || 'Update failed', 'error');
     } finally {
+      Loader.hide();
       btn.disabled=false; btn.textContent='Save Changes';
     }
   });
@@ -521,6 +527,7 @@
   // ── Delete product ──────────────────────────────────────────────────────────
   async function deleteProduct(id, name) {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    Loader.show('Deleting product…');
     try {
       const res = await fetch(`${API_BASE}/products/${id}`, { method:'DELETE', headers:{ 'Authorization':`Bearer ${token}` } });
       if (!res.ok) throw new Error();
@@ -528,6 +535,8 @@
       await loadProducts();
     } catch {
       toast('Failed to delete product', 'error');
+    } finally {
+      Loader.hide();
     }
   }
 
